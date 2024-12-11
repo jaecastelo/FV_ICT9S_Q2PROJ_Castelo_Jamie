@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Archives</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdf8f2;
+    }
+            { font-family: Arial, sans-serif;
+            margin: 0;
+            background: url('https://media.istockphoto.com/id/1210441991/vector/restaurant-chef-cute-hand-drawn-seamless-pattern-vector-illustration.jpg?s=612x612&w=0&k=20&c=qb7TyhC1kwtCAO0WTNTtWaCAKRsihPx9ADGRRZoUNX8=') repeat;
+            color: #F2F9FF;
+        }
+    
+        .navbar {
+            background-color: #E195AB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #FFCCE1;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .navbar .search-box {
+            display: flex;
+            align-items: center;
+        }
+        .navbar input[type="text"] {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        .navbar button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+   
+    .categories {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .categories h2 {
+      margin: 0;
+      color: #333;
+      font-size: 24px;
+    }
+
+    .categories p {
+      color: #666;
+      margin: 10px 0 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin: 0 0 10px;
+      color: #333;
+      font-size: 18px;
+    }
+
+    .card-content p {
+      margin: 0 0 15px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .card-content button {
+      padding: 10px 15px;
+      color: #fff;
+      background-color: #FB9EC6;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card-content button:hover {
+      background-color: #f7b0cf;
+    }
+
+  
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #333;
+      padding: 20px;
+      color: #fff;
+      max-width: 800px;
+      width: 90%;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2 {
+      color: #FB9EC6;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 10px;
+    }
+
+    .modal-content ul {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+
+    .modal-content ul li {
+      margin-bottom: 5px;
+    }
+
+    .modal-content p {
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background-color: #FB9EC6;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #f7b0cf;
+    }
+  </style>
+</head>
+<body>
+   <div class="navbar">
+        <div class="logo">
+            <h2>Recipe Archives</h2>
+        </div>
+        <div class="links">
+            <a href="#">Home</a>
+            <a href="#">Categories</a>
+            <a href="#">About</a>
+            <a href="#">Submit Recipe</a>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search">
+            <button>Search</button>
+        </div>
+    </div>
+
+
+  <section class="categories">
+    <h2>Recipe Categories</h2>
+    <p>Come explore our scrumptious recipes! We have recipes from Bicol that range from breakfast, lunch, dinner, and even desserts!</p>
+    <div class="grid">
+  
+      <div class="card">
+        <img src="https://down-ph.img.susercontent.com/file/e0f7beb4b4b01a3876283ef6d63d5026" alt="Pancit Bato">
+        <div class="card-content">
+          <h3>Pancit Bato</h3>
+          <p>A flavorful and yummy noodle dish made with stir-fried with meat, seafood, and vegetables, which makes the taste savory and rich. </p>
+          <button onclick="openModal('Pancit Bato')">View Recipe</button>
+        </div>
+      </div>
+      
+      <div class="card">
+        <img src="https://assets.unileversolutions.com/recipes-v2/243019.jpg" alt="Bicol Express">
+        <div class="card-content">
+          <h3>Bicol Express</h3>
+          <p> A spicy and creamy dish from Bicol, showcasing the fantastic flavors of the Bicol region.</p>
+          <button onclick="openModal('Bicol Express')">View Recipe</button>
+        </div>
+      </div>
+   
+      <div class="card">
+        <img src="https://assets.unileversolutions.com/recipes-v2/110738.jpg" alt="Laing">
+        <div class="card-content">
+          <h3>Laing</h3>
+          <p>A rich and creamy Filipino dish from Bicol made with dried taro leaves, enhancing its flavor.</p>
+          <button onclick="openModal('Laing')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://oragonkabicol.wordpress.com/wp-content/uploads/2017/03/wp-1489299042108.jpeg" alt="Chili Ice Cream">
+        <div class="card-content">
+          <h3>Chili Ice Cream</h3>
+          <p>A unique dessert that has the combination of sweet and spicy, which makes it traditional and unique.</p>
+          <button onclick="openModal('Chili Ice Cream')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://i.pinimg.com/736x/5a/22/f1/5a22f1f9b0d376757e56257bdfaa2371.jpg" alt="Bicol Longganisa and Egg">
+        <div class="card-content">
+          <h3> Bicol Longganisa and egg</h3>
+          <p>A flavorful Filipino breakfast dish with a garlikcy sausage from Bicol that has been paired with egg, making a delicious blend.</p>
+          <button onclick="openModal('Bicol Longganisa and Egg')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://pilipinasrecipes.com/wp-content/uploads/2018/05/Pinangat-na-Isda-Recipe.jpg" alt="Pinangat">
+        <div class="card-content">
+          <h3>Pinangat</h3>
+          <p>A traditional Bicolano dish made of seafood that includes taro leaves, giving a creamy and mildly spicy flavor.</p>
+          <button onclick="openModal('Pinangat')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://yummykitchentv.com/wp-content/uploads/2023/03/Ginataang-Alimasag-500x500.jpg" alt="Ginatang Crab">
+        <div class="card-content">
+          <h3>Ginatang Crab</h3>
+          <p>A Filipino dish featuring fresh crabs cooked in creamy coconut milk, offering a rich and mildly spicy taste.</p>
+          <button onclick="openModal('Ginatang Crab')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://i.ytimg.com/vi/siQbxVN57nM/maxresdefault.jpg" alt="Pancit Dinuguan">
+        <div class="card-content">
+          <h3>Pancit Dinuguan</h3>
+          <p>A unique Filipino dish that has a combination of noodles with a rich, tangy flavor with a slightly spicy pork blood stew, creating a flavorful dish full of textures and flavors.</p>
+          <button onclick="openModal('Pancit Dinuguan')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://i0.wp.com/www.angsarap.net/wp-content/uploads/2019/02/Tinutong-na-Manok-sa-Gata-Wide.jpg?ssl=1" alt="Tinutong na Manok">
+        <div class="card-content">
+          <h3>Tinutong na Manok</h3>
+          <p>A scrumptious Filipino dish from Bicol that is made with chicken simmered in coconut milk with toasted rice, creating a creamy and flavorful stew.</p>
+          <button onclick="openModal('Tinutong na Manok')">View Recipe</button>
+        </div>
+      </div>
+
+       <div class="card">
+        <img src="https://www.foxyfolksy.com/wp-content/uploads/2022/12/sinantolan.jpg" alt="Sinantolan">
+        <div class="card-content">
+          <h3>Sinantolan</h3>
+          <p>A creamy Filipino dish made with grated santol (cottonfruit) cooked in coconut milk and spices, making a unique balance of sweet, savory, and mildly spicy flavors.</p>
+          <button onclick="openModal('Sinantolan')">View Recipe</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+      
+
+ 
+  <div id="recipeModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <img id="modalImage" src="" alt="Recipe Image">
+      <h3>Ingredients:</h3>
+      <ul id="modalIngredients"></ul>
+      <h3>Instructions:</h3>
+      <p id="modalInstructions"></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+ 
+  <script>
+    const recipes = {
+      "Pancit Bato": {
+        image: "https://whisperofyum.com/wp-content/uploads/2022/03/pancit-canton.jpg",
+        ingredients: [
+       "3/4 lb. Pancit Bato",
+"2 cups chopped cabbage",
+"1 medium carrot julienned",
+"1 cup snap peas",
+"2 cups chicken broth",
+"6 ounces pork sliced",
+"6 ounces medium (shrimp shell and head removed)",
+"1/4 cup soy sauce",
+"2 tablespoons fish sauce",
+"ground black pepper to taste",
+"1 onion sliced",
+"2 teaspoons minced garlic",
+"3 tablespoons cooking oil",
+        ],
+         instructions:
+          "* Heat the cooking oil in a cooking pot or deep pan.Once the oil is hot, saute the garlic and onion.Add the sliced pork. Cook for 3 minutes. Pour-in the soy sauce, fish sauce, and chicken broth. Let boil. Simmer covered for 20 minutes. Add water if needed. Add the ground black pepper. Stir. Put-in the shrimp, snap peas, and carrots. Cook for a minute. Add the cabbage. Cook for 2 minutes. Put-in the noodles (pancit bato). Stir and cook until all the liquid is absorbed. The noodles should be soft . Otherwise, add a little water to soften the noodles. Now Serve and Enjoy !."
+      },
+      "Bicol Express": {
+        image: "https://panlasangpinoy.com/wp-content/uploads/2021/04/Pork-in-coconut-milk.jpg",
+        ingredients: [
+          "2 lbs. pork belly sliced into strips",
+"2 cups coconut milk",
+"2 cups coconut cream",
+"1/4 cup shrimp paste or salted Krill",
+"5 cloves garlic crushed",
+"5 pieces Thai chili pepper chopped",
+"2 thumbs ginger minced",
+"1 piece onion chopped",
+"2 pieces Serrano pepper sliced",
+"1 cup water optional",
+"8 grams Maggi Magic Sarap",
+        ],
+        instructions:
+          "* Combine pork, ginger, garlic, onion, Thai chili pepper, long green pepper, and coconut milk in a pan. Mix well. Cover the pan and turn the heat to on. Let the mixture boil. Stir and adjust the heat to low. Cover and simmer for 50 minutes. Note: add water as necessary. Add the remaining coconut cream and bagoong alamang (as needed). Season with Maggi Magic Sarap. Continue cooking in low heat until the sauce thickens. Now serve with warm rice"
+      },
+       "Laing": {
+        image: "https://panlasangpinoy.com/wp-content/uploads/2015/01/Laing-Recipe.jpg",
+        ingredients: [
+          "3.5 oz taro leaves dried",
+"6 cups coconut milk",
+"2 cups coconut cream",
+"1/2 cup shrimp paste bagoong or balaw",
+"1/2 lb. pork shoulder thinly sliced",
+"5 to 7 pieces red chilies",
+"1 piece onion sliced",
+"1/2 cup sliced ginger",
+"8 cloves garlic crushed",
+        ],
+        instructions:
+          "* Combine the coconut milk, pork, shrimp paste, ginger, onion, and garlic in a cooking pot. Heat the pot and let boil. Once the mixture starts to boil, gently stir to mix the ingredients. Cover the pot and simmer for 15 to 20 minutes. Make sure to stir once in a while to prevent the ingredients from sticking on the bottom of the cooking pot. Add the dried taro leaves. Do not stir. Let it stay until the leaves absorb the coconut milk. This takes about 20 to 30 minutes. You can gently push the leaves down so that it can absorb more coconut milk. Once the leaves absorb the coconut milk, stir the leaves and then continue to cook for to 10 minutes. Pour the coconut cream into the cooking pot. Add the red chilies. Stir. Cook for 10 to 12 minutes."
+      },
+       "Chili Ice Cream": {
+        image: "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_680/https://www.thehomecookskitchen.com/wp-content/uploads/2018/07/chili-chocolate-ice-cream-incontent2.jpg",
+        ingredients: [
+         "14 oz can of condensed milk",
+"2 cup cold heavy whipping cream",
+"¾ cup dark chocolate",
+"⅛ teaspoon cayenne pepper",
+        ],
+        instructions:
+          "* Gently heat cream and chocolate until the chocolate has fully melted. You can either do this in the microwave, heating at 30-second increments then stirring, or on the stovetop over low heat. Add the cayenne pepper bit by bit, and taste. Adjust flavor according to tastes. Cover the cream and chocolate, and refrigerate for 2 hours until cream is cold again. Whip chocolate cream until stiff peaks form. This may take slightly longer than regular whipping cream because of the chocolate. Just keep going! Pour condensed milk into a large bowl, and add a scoop of the chocolate cream. Gently fold, then fold in remaining cream. Pour into an air-tight container or loaf pan lined with parchment paper. If using a loaf tin, wrap in one layer of plastic wrap, and finish a layer of aluminium foil."
+      },
+       "Bicol Longganisa and Egg": {
+        image: "https://www.kawalingpinoy.com/wp-content/uploads/2014/09/longganisa-8.jpg",
+        ingredients: [
+           "pork shoulder",
+           "pork fat",
+           "ground pork",
+           "paprika",
+           "salt",
+           "pepper",
+           "soy sauce",
+           "vinegar",
+           "fresh garlic",
+           "sugar",
+           "anisado wine",
+           "water and oil",
+
+        ],
+        instructions:
+          "* Prepare meat filling- Combine ground pork, minced pork fat, soy sauce, vinegar, anisado wine, sugar, salt, pepper, paprika, and garlic in a bowl. Refrigerate for about 2 hours to allow flavors to meld and the meat mixture to firm up. Separate into individual links. Tie off the other end into a double knot or with kitchen twine. Place in a ziplock bag and refrigerate overnight.  When ready to cook, cut the sausage into individual links and prick each sausage once or twice with the tip of a knife. Place in a wide pan with water and bring to a boil. Lower heat, cover, and simmer until meat is fully cooked and liquid is almost absorbed. Add oil and continue to cook, stirring regularly, until sausages are caramelized. Remove from the pan and serve hot."
+      },
+       "Pinangat": {
+        image: "https://www.unileverfoodsolutions.com.ph/dam/global-ufs/mcos/sea/philippines/acm/recipe/2023/pinangat-ng-bicol/pinangat-ng-bicol-main.jpg",
+        ingredients: [
+         "Coconut Milk, 500 g ",
+"Garlic (grated), 50 g",
+"Ginger (grated), 80 g",
+"Red Onions ( grated ), 150 g",
+"Red Chilis (sliced), 20 g",
+"Bagoong (cooked), 100 g",
+"Pork belly, 500 g",
+"Peeled shrimp or crab meat, 300 g",
+"Dried fish (shredded), 200 g ",
+"Pepper, 2 g",
+"Taro leaves",
+        ],
+        instructions:
+          "* Create the Pinangat by combining all the Ingredients all together. Cook it in a pot. Serve with Garlic and Red chilis"
+      },
+ "Ginatang Crab": {
+        image: "https://panlasangpinoy.com/wp-content/uploads/2015/06/1-ginataang-alimasag.jpg",
+        ingredients: [
+         "3 lbs blue crabs",
+"2 tbsp shrimp paste",
+"1 tbsp fish sauce",
+"1 tsp garlic minced",
+"1 piece onion minced",
+"1 thumb ginger cut into thin strips",
+"3 tbsp cooking oil",
+"4 cups coconut milk",
+"½ tsp ground black pepper",
+"1 bunch fresh spinach",
+"6 pieces Thai chili",
+        ],
+        instructions:
+          "* In a large pot, sauté the garlic, onion, and ginger. Add the ground black pepper and coconut milk then bring to a boil. Put-in the shrimp paste and fish sauce and cook until the coconut milk’s texture is thick and natural oil comes out of it (approximately 20 ++ minutes) Add the Thai chili and simmer for 5 minutes. Put the crabs in the pot and mix until evenly covered with coconut milk. Simmer for 5 to 20 minutes. (Note: If crabs were steamed prior to cooking, 5 to 8 minutes is enough)A dd the spinach and simmer for 5 minutes. Serve hot. Share and Enjoy!"
+      },
+       "Pancit Dinuguan": {
+        image: "https://chejjkitchen.com/cdn/shop/articles/how-to-cook-pancit-dinuguan.jpg?v=1684589894",
+        ingredients: [
+        "pork shoulder or pork belly",
+        "garlic",
+        "vegetable oil",
+        "onion",
+        "black peppercorns",
+        "bay leaves",
+        "soy sauce",
+        "vinegar",
+        ],
+        instructions:
+          "* Prepare the Pork. Add the Spices, Fry the spices in a pan over medium heat until fragrant. Blend spices together to create the spice mix. Taste the mixture and adjust the seasoning as needed. Measure and add the herbs to the dish for an aromatic and flavorful finish."
+      },
+       "Tinutong na Manok": {
+        image: "https://images.yummy.ph/yummy/uploads/2017/01/tinutungan-na-manok-2.jpg",
+        ingredients: [
+        "2 cups Fresh Coconut (buko) grated",
+"1/2 Cup coconut vinegar or rice vinegar, or coconut sap",
+"2 cups fresh coconut milk (gata)",
+"8 cloves Garlic peeled",
+"1 tablespoon ginger sliced",
+"2 medium onion sliced",
+"3 to 4 pieces red chili pepper (siling labuyo) Optional",
+"6 quarters Chicken (use leg and thigh), separted",
+"Salt",
+"black pepper ",
+"coconut (buko) toasted, grated, to garnish (optional)",
+        ],
+        instructions:
+          "* Preheat oven to 400°F. Combine grated coconut and coconut vinegar in a bowl. Transfer mixture to a piece of cheesecloth; squeeze liquid into a bowl. Set aside. Spread squeezed grated coconut on a baking sheet. Roast in the preheated oven, stirring occasionally, until dark brown, about 8 minutes. Switch setting to broil (or the highest temperature) and roast coconut until slightly burned, about 2 minutes. Set aside. Combine burned grated coconut, extracted coconut vinegar mixture, coconut milk, garlic, ginger, onions, and chilies, if using, in a pot. Bring to a boil, then lower heat and simmer for 10 minutes. Strain mixture into a pot. Set aside and keep warm. Season chicken with salt and pepper. Grill or pan-fry chicken until browned, about 10 minutes. (If grilling, you can wrap them in banana leaves first.) Place chicken on a platter. Pour coconut sauce over. Garnish with chilies and toasted grated coconut, if desired. Serve hot."
+      },
+      "Sinantolan": {
+        image: "https://panlasangpinoy.com/wp-content/uploads/2017/09/Ginataang-Santol-Sinantolan-Recipe-Panlasang-Pinoy.jpg",
+        ingredients: [
+        "4 pieces santol peeled and seeds removed",
+"1/4 lb. ground pork",
+"3 cups coconut cream",
+"2 pieces long green pepper siling pansigang sliced crosswise",
+"5 pieces Thai chili or siling labuyo",
+"3 tablespoons shrimp paste",
+"1 medium red onion minced",
+"3 cloves garlic crushed",
+"3 tablespoons cooking oil",
+        ],
+        instructions:
+          "* Mince (cut into very small pieces) the santol using a food processor. Note: you can also do it manually, if preferred. Place the minced santol in the middle of a cheese cloth. Secure the santol inside the cloth and then wring until all the liquid comes out. Set aside. Heat oil in a pan. Saute garlic and onion.Once the onion starts to get translucent, add the ground pork. Continue to cook until the pork turns light brown. Add the minced santol. Cook for 3 to 5 minutes. Pour coconut milk into the pan. Let boil. Stir and cover the pan. Continue to cook in medium heat until the liquid reduces to half. Add shrimp paste, siling pansigang, ang Thai chili. Stir. Continue to cook until the liquid completely evaporates. Transfer to a serving plate. Serve. Share and enjoy!"
+      }
+    };
+   
+
+    function openModal(recipeName) {
+      const modal = document.getElementById("recipeModal");
+      const recipe = recipes[recipeName];
+      document.getElementById("modalTitle").textContent = recipeName;
+      document.getElementById("modalImage").src = recipe.image;
+      document.getElementById("modalIngredients").innerHTML = recipe.ingredients
+        .map((item) => `<li>${item}</li>`)
+        .join("");
+      document.getElementById("modalInstructions").textContent =
+        recipe.instructions;
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("recipeModal").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
